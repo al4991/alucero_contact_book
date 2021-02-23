@@ -64,10 +64,8 @@ async (req, res) => {
                 res.json({ token: token });
             })
         );
-
-
     } catch (err) {
-        console.log(err.message)
+        console.error(err.message)
         return res.status(500).send('Server Error');
     }
 });
