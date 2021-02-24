@@ -1,19 +1,19 @@
-const jwt = require('jsonwebtoken');
-const config = require('config');
+const jwt = require("jsonwebtoken");
+const config = require("config");
 
-module.exports = function(req, res, next) {
-    // Get token from header
-    const token = req.header('x-auth-token');
+module.exports = function (req, res, next) {
+  // Get token from header
+  const token = req.header("x-auth-token");
 
-    // token? 
-    if (!token) {
-        return res.status(401).json({ msg: 'Auth denied due to missing token' });
-    }
-    try {
-        const decoded = jwt.verify(token, config.get('jwtSecret'));
-        req.user = decoded.user; 
-        next(); 
-    } catch (err) {
-        res.status(401).json({msg: 'Invalid Token'}); 
-    }
-}
+  // token?
+  if (!token) {
+    return res.status(401).json({ msg: "Auth denied due to missing token" });
+  }
+  try {
+    const decoded = jwt.verify(token, config.get("jwtSecret"));
+    req.user = decoded.user;
+    next();
+  } catch (err) {
+    res.status(401).json({ msg: "Invalid Token" });
+  }
+};
